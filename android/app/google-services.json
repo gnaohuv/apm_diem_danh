@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "708335126404",
+    "project_id": "appdiemdanh-768a4",
+    "storage_bucket": "appdiemdanh-768a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708335126404:android:02eab1feebb7b18971ffd1",
+        "android_client_info": {
+          "package_name": "com.example.app_diem_danh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhHV8Ox0I1vVdaIddiPnjJj62C1etvxK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
