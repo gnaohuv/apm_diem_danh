@@ -158,7 +158,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-
   }
 
   Widget fieldTitle(String title) {
