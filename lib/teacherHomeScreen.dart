@@ -1,36 +1,38 @@
+import 'package:app_diem_danh/StudentList.dart';
 import 'package:app_diem_danh/calendarscreen.dart';
 import 'package:app_diem_danh/eventscreen.dart';
 import 'package:app_diem_danh/loginscreen.dart';
 import 'package:app_diem_danh/profilescreen.dart';
 import 'package:app_diem_danh/services/location_service.dart';
+import 'package:app_diem_danh/teacherEventScreen.dart';
+import 'package:app_diem_danh/teacherprofilescreen.dart';
+import 'package:app_diem_danh/teachertodayscreen.dart';
 import 'package:app_diem_danh/todayscreen.dart';
 import 'package:app_diem_danh/model/user.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class TeacherHomeScreen extends StatefulWidget {
+  const TeacherHomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<TeacherHomeScreen> createState() => _TeacherHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _TeacherHomeScreenState extends State<TeacherHomeScreen> {
   double screenHeight = 0;
   double screenWidth = 0;
 
   Color primary1 = const Color(0xffeef444c);
   Color primary = const Color.fromRGBO(80, 89, 201, 1);
 
-  int currentIndex = 2;
+  int currentIndex = 1;
 
   List<IconData> navigationIcons = [
-    FontAwesomeIcons.clockRotateLeft,
-    FontAwesomeIcons.calendar,
+    FontAwesomeIcons.list,
     FontAwesomeIcons.check,
     FontAwesomeIcons.user,
   ];
@@ -54,10 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         User.canEdit = doc['canEdit'];
         User.fullName = doc['fullName'];
-        User.clasS = doc['class'];
+        User.email = doc['email'];
         User.birthDate = doc['birthDate'];
         User.address = doc['address'];
-        User.email = doc['email'];
       });
     } catch (e) {
       return;
@@ -101,7 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
@@ -110,10 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: IndexedStack(
         index: currentIndex,
         children: [
-          new CalendarScreen(),
-          new EventScreen(),
-          new TodayScreen(),
-          new ProfileScreen(),
+          new LecturerScreen(),
+          new TeacherTodayScreen(),
+          new TeacherProfileScreen(),
         ],
       ),
       bottomNavigationBar: Container(
@@ -142,41 +141,41 @@ class _HomeScreenState extends State<HomeScreen> {
               for (int i = 0; i < navigationIcons.length; i++) ...<Expanded>{
                 Expanded(
                     child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      currentIndex = i;
-                    });
-                  },
-                  child: Container(
-                    height: screenHeight,
-                    width: screenWidth,
-                    color: Colors.white,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            navigationIcons[i],
-                            color: i == currentIndex ? primary : Colors.black54,
-                            size: i == currentIndex ? 30 : 26,
+                      onTap: () {
+                        setState(() {
+                          currentIndex = i;
+                        });
+                      },
+                      child: Container(
+                        height: screenHeight,
+                        width: screenWidth,
+                        color: Colors.white,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                navigationIcons[i],
+                                color: i == currentIndex ? primary : Colors.black54,
+                                size: i == currentIndex ? 30 : 26,
+                              ),
+                              i == currentIndex
+                                  ? Container(
+                                margin: EdgeInsets.only(top: 6),
+                                height: 3,
+                                width: 22,
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(40)),
+                                  color: primary,
+                                ),
+                              )
+                                  : const SizedBox(),
+                            ],
                           ),
-                          i == currentIndex
-                              ? Container(
-                                  margin: EdgeInsets.only(top: 6),
-                                  height: 3,
-                                  width: 22,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(40)),
-                                    color: primary,
-                                  ),
-                                )
-                              : const SizedBox(),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                )),
+                    )),
               }
             ],
           ),

@@ -33,12 +33,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(top: 32),
+              margin: const EdgeInsets.only(top: 20),
               child: Text(
                 "Lịch Sử Điểm Danh",
                 style: TextStyle(
                   fontFamily: "LexendBold",
-                  fontSize: screenWidth / 18,
+                  fontSize: screenWidth / 17,
+                  color: primary
                 ),
               ),
             ),
@@ -118,7 +119,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               height: screenHeight / 1.45,
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection("Student")
+                    .collection("User")
                     .doc(User.id)
                     .collection("Record")
                     .snapshots(),

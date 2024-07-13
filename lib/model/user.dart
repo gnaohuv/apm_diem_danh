@@ -1,5 +1,6 @@
 class User {
   static String studentId = " ";
+  static String teacherId = " ";
   static String id = " ";
   static String fullName = " ";
   static String clasS = " ";

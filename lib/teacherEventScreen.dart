@@ -12,14 +12,14 @@ class Event {
   Event(this.title, this.description, this.startTime, this.endTime);
 }
 
-class EventScreen extends StatefulWidget {
-  const EventScreen({Key? key});
+class TeacherEventScreen extends StatefulWidget {
+  const TeacherEventScreen({Key? key});
 
   @override
-  State<EventScreen> createState() => _EventScreenState();
+  State<TeacherEventScreen> createState() => _TeacherEventScreenState();
 }
 
-class _EventScreenState extends State<EventScreen> {
+class _TeacherEventScreenState extends State<TeacherEventScreen> {
   TimeOfDay selectedTimeOfDay = TimeOfDay.now();
   Color primary = const Color.fromRGBO(80, 89, 201, 1);
   DateTime today = DateTime.now();
@@ -203,13 +203,11 @@ class _EventScreenState extends State<EventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
-        title: Text('Lịch học',
-        style:TextStyle(
-          fontFamily: "LexendBold",
-          color: primary
-        )),
+        title: Text('Lịch dạy',
+            style:TextStyle(
+                fontFamily: "LexendBold"
+            )),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -260,7 +258,7 @@ class _EventScreenState extends State<EventScreen> {
                 children: [
                   Center(
                     child: Text(
-                      'Lịch học ngày ${today.day}/${today.month}/${today.year}',
+                      'Lịch dạy ngày ${today.day}/${today.month}/${today.year}',
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -282,9 +280,9 @@ class _EventScreenState extends State<EventScreen> {
                             builder: (context) => AlertDialog(
                               title: Text('Xác nhận xóa lịch học',
                                   style: TextStyle(
-                                    fontFamily: "LexendBold",
-                                    fontSize: 20,
-                                    color: primary
+                                      fontFamily: "LexendBold",
+                                      fontSize: 20,
+                                      color: primary
                                   )),
                               content: Text('Bạn có chắc chắn muốn xóa ?'),
                               actions: [

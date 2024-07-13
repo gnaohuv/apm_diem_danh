@@ -1,6 +1,7 @@
 import 'package:app_diem_danh/homescreen.dart';
 import 'package:app_diem_danh/loginscreen.dart';
 import 'package:app_diem_danh/model/user.dart';
+import 'package:app_diem_danh/teacherHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -57,21 +58,32 @@ class _AuthCheckState extends State<AuthCheck> {
     _getCurrentUser();
   }
   void _getCurrentUser() async {
-    sharedPreferences = await  SharedPreferences.getInstance();
-    
-    try{
-      if(sharedPreferences.getString('studentId') != null){
+    sharedPreferences = await SharedPreferences.getInstance();
+
+    try {
+      if (sharedPreferences.getString('studentId') != null) {
         setState(() {
           User.studentId = sharedPreferences.getString('studentId')!;
           userAvailable = true;
+
+          // Lấy và kiểm tra vai trò
+          String role = sharedPreferences.getString('role') ?? ''; // Đảm bảo xử lý trường hợp null
+          if (role == 'Teacher') {
+            // Nếu vai trò là giáo viên, chuyển hướng đến TeacherHomeScreen
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => TeacherHomeScreen()),
+            );
+          }
         });
       }
-    } catch(e){
+    } catch (e) {
       setState(() {
         userAvailable = false;
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return userAvailable ? const HomeScreen() : const LoginScreen();
